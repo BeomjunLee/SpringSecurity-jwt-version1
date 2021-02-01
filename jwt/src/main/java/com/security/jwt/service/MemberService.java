@@ -97,5 +97,4 @@ public class MemberService {
         return memberRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("해당되는 유저를 찾을수 없습니다"));
     }
 
-
 }

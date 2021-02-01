@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.4.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "org.asciidoctor.convert" version "1.5.9.2"
 	id 'java'
 }
 
@@ -20,9 +21,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	compileOnly 'org.projectlombok:lombok'
@@ -33,12 +32,55 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
+//show jpa
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.1'
 
-	//jwt토큰
+//restapi & restdocs
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+//jwt
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compile group: 'com.auth0', name: 'java-jwt', version: '3.12.0'
 }
 
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+	set('outputsDir',file("build/generated-docs"))
+	set('docsDir',file("docs"))
+}
+
 test {
+	outputs.dir snippetsDir
 	useJUnitPlatform()
+}
+asciidoctor {
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+task copyRestDocs(type: Copy) {
+	dependsOn asciidoctor
+	from "${asciidoctor.outputDir}/html5"
+	into "${sourceSets.main.output.resourcesDir}/static/docs"
+	from "${asciidoctor.outputDir}/html5"
+	into "${docsDir}"
+	rename{
+		String fileName->
+			fileName.replace("index.html","RestApiDocs.html")
+	}
+}
+
+bootJar {
+	dependsOn copyRestDocs
+}
+
+allprojects {
+	gradle.projectsEvaluated {
+		tasks.withType(JavaCompile) {
+			options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+		}
+	}
 }
