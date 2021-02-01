@@ -1,6 +1,7 @@
 package com.security.jwt.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.security.jwt.domain.Member;
 import com.security.jwt.domain.Role;
 import lombok.*;
 
@@ -13,9 +14,6 @@ public class MemberDto {
     private Long member_id;
     private String username;
     private String name;
-    private String phoneNum;
-    private String email;
-    private int point;
 
     @JsonIgnore
     private Role role;
