@@ -16,7 +16,7 @@ JWT 토큰을 구현한 후 RefreshToken의 개념을 추가해서 구현해봤�
 - JWT를 무효화시키면 되지않나 라고 생각할수 있지만 JWT는 설정한 유효시간이 지나야지만 만료될수 있습니다. 그전에 억지로 만료시킬수 없습니다<br><br>
 <br><br>
 ## AccessToken과 RefreshToken을 둘다 이용했을 경우
-- AccessToken의 유효시간을 짧게 설정하고 RefreshToken의 유효시간을 길게 설정합니다 그러면 AccessToken의 유효시간이 만료되어도 RefreshToken으로 사용자가 로그인을 하지 않고 AccessToken을 재밟급 받을수 있게됩니다<br><br>
+- AccessToken의 유효시간을 짧게 설정하고 RefreshToken의 유효시간을 길게 설정합니다 그러면 AccessToken의 유효시간이 만료되어도 RefreshToken으로 사용자가 로그인을 하지 않고 AccessToken을 재급 받을수 있게됩니다<br><br>
 - AccessToken의 유효시간이 짧아지므로 AccessToken이 탈취당해도 정보를 취득하는데 시간이 줄어들어서 보안성이 높아집니다<br><br><br><br>
 
 ![2](https://user-images.githubusercontent.com/69130921/106415065-86d3e000-6491-11eb-97f9-82874ebfcc5a.PNG)
