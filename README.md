@@ -1,8 +1,8 @@
 ## SpringSecurity-JWT (AccessToken & RefreshToken)
-https://blog.naver.com/qjawnswkd/222202051145 (JWT AccessToken만 구현 포스팅)<br><br>
+https://blog.naver.com/qjawnswkd/222202051145 (JWT AccessToken)<br><br>
 
 
-(추가)RefreshToken의 개념을 추가해서 구현<br><br><br>
+<strong>(추가)RefreshToken을 추가해서 구현</strong><br><br><br>
 
 ## 작동 방식
 - Client가 로그인을 시도합니다<br><br>
