@@ -1,5 +1,8 @@
 ## SpringSecurity-JWT VERSION2(AccessToken & RefreshToken)
 
+### 최적화된 최신버전 존재
+https://github.com/BeomjunLee/springSecurity-jwt-version2
+
 <br>
 
 ### JWT AccessToken
